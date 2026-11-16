@@ -33,3 +33,6 @@ Synthetic tests prove the logic is correct, **not that any strategy is profitabl
 - Backtest: signal from bar j close, fill at bar j+1 open; stop assumed first if stop and target are in the same bar; gaps fill at the open; data gaps block trading; spread/slippage are assumed constants.
 - Smoke run on a synthetic random walk: no strategy passed validation (expected), and the strategies fire rarely (trend: 2 trades in 9,600 M15 bars). With so few trades the 30-trade OOS minimum may be hard to reach: thresholds need review on real data, not loosening to make something pass.
 - Per-trade Sharpe/Sortino are not annualised.
+
+## Data download
+`scripts/download_okx_candles.py` fetches public OKX candles (no keys). Tested only against a mocked server: never run against real OKX from this environment (blocked).
