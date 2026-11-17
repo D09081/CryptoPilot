@@ -11,7 +11,7 @@ The project is **NOT ready** for Demo, Paper or Live trading. Only the decision 
 | 5 | Risk Manager, sizing | Done and unit-tested. **No Portfolio Manager persistence.** |
 | 6 | Backtesting + Validator | Engine, metrics, validator, CSV loader and CLI (`scripts/run_backtest.py`) done and unit-tested. **Not yet run on real OKX data (no data access), so no strategy is validated or admitted and the engine always HOLDs.** Missing: parameter-sensitivity and per-regime checks, order-book-based costs. |
 | 7 | Paper trading + Execution Engine | Paper engine, live feed (OKX->Binance fallback), scheduled job + report done and unit-tested (matches batch backtester trade-for-trade). **Not yet run live**; Execution Engine (real/demo orders) not started. See docs/PAPER.md |
-| 8 | OKX Demo | Not started |
+| 8 | OKX Demo | Adapter (demo-only), Execution Engine, demo mirror, check/run scripts and manual workflow done and unit-tested on a fake exchange. **Never run against real OKX demo**: see docs/DEMO.md |
 | 9 | Champion-Challenger, Market Memory | Not started |
 | 10 | News / Whale / Order Flow | Not started |
 | 11 | Telegram Bot | Not started |

@@ -74,7 +74,7 @@ class _T:
 
 
 def run_job(state_dir: str, equity: float = 55.0, now_ms: int | None = None,
-            fetch: Callable = fetch_closed_h4) -> str:
+            fetch: Callable = fetch_closed_h4, strategies=None) -> str:
     os.makedirs(state_dir, exist_ok=True)
     now_ms = now_ms if now_ms is not None else int(time.time() * 1000)
     paused = os.path.exists(os.path.join(state_dir, "PAUSE"))
@@ -85,7 +85,7 @@ def run_job(state_dir: str, equity: float = 55.0, now_ms: int | None = None,
         sources.add(src)
     source = "+".join(sorted(sources))
     states = {}
-    for strat in STRATEGIES:
+    for strat in (strategies or STRATEGIES):
         path = os.path.join(state_dir, f"{strat.name}.json")
         st = _load(path, strat.name, equity)
         if st.get("source") and st["source"] != source:

@@ -1,0 +1,46 @@
+name: okx-demo
+# Manual only. 'check' = read-only connectivity test. 'run' = paper decision + mirror onto the OKX DEMO account.
+# Needs repository secrets OKX_DEMO_KEY, OKX_DEMO_SECRET, OKX_DEMO_PASSPHRASE (demo-trading API keys).
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check (read-only) or run (places DEMO orders)"
+        required: true
+        default: "check"
+        type: choice
+        options: [check, run]
+permissions:
+  contents: write
+concurrency:
+  group: okx-demo
+  cancel-in-progress: false
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OKX_DEMO_KEY: ${{ secrets.OKX_DEMO_KEY }}
+      OKX_DEMO_SECRET: ${{ secrets.OKX_DEMO_SECRET }}
+      OKX_DEMO_PASSPHRASE: ${{ secrets.OKX_DEMO_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy pandas
+      - name: Connectivity check
+        if: ${{ inputs.mode == 'check' }}
+        run: python scripts/demo_check.py
+      - name: Demo run
+        if: ${{ inputs.mode == 'run' }}
+        run: python scripts/demo_run.py
+      - name: Save demo state
+        if: ${{ always() && inputs.mode == 'run' }}
+        run: |
+          git config user.name "demo-bot"
+          git config user.email "demo-bot@users.noreply.github.com"
+          git add demo
+          git diff --cached --quiet || git commit -m "demo: update state"
+          git pull --rebase -q || true
+          git push
