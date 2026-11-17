@@ -16,7 +16,10 @@ from .sizing import ExchangeRules
 from .slow import SlowStrategy
 
 SYMBOLS = ["BTC/USDT", "ETH/USDT"]
-STRATEGIES = [SlowStrategy("momentum", 180), SlowStrategy("momentum", 360)]
+# momentum_180/360: from the slow family. ema_trend_30_100 and momentum_90: the two "active" candidates with the
+# highest DEV+VALIDATION net profit (chosen WITHOUT looking at the 2025-26 final period).
+STRATEGIES = [SlowStrategy("momentum", 180), SlowStrategy("momentum", 360),
+              SlowStrategy("ema_trend", 30, 100), SlowStrategy("momentum", 90)]
 MARKET = MarketCosts(2.0, 2.0, 5.0)
 # PLACEHOLDER exchange rules: verify against OKX instrument data before relying on size/min-notional results.
 RULES = {s: ExchangeRules(s, 0.1, 1e-8, 1e-5, 1.0, 0.001, 0.001) for s in SYMBOLS}

@@ -73,6 +73,14 @@ CANDIDATES: List[SlowStrategy] = [
 ]
 
 
+# Pre-registered "active" family (faster lookbacks => more trades). Declared before any result was seen.
+ACTIVE_CANDIDATES: List[SlowStrategy] = [
+    SlowStrategy("donchian", 20), SlowStrategy("donchian", 40),
+    SlowStrategy("ema_trend", 20, 50), SlowStrategy("ema_trend", 30, 100),
+    SlowStrategy("momentum", 42), SlowStrategy("momentum", 90),
+]
+
+
 def run_slow_backtest(symbol: str, c: Candles, strat: SlowStrategy, rules: ExchangeRules,
                       market: MarketCosts, equity: float, risk_pct: float = 0.5,
                       warmup: int = 410) -> List[Trade]:

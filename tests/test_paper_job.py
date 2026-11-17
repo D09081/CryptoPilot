@@ -24,7 +24,8 @@ def fake_fetch_factory(n):
 def test_job_creates_state_and_report_then_resumes(tmp_path):
     d = str(tmp_path / "paper")
     paper_job.run_job(d, 55.0, NOW, fake_fetch_factory(600))          # first run: forward-only start
-    assert sorted(os.listdir(d)) == ["REPORT.md", "momentum_180.json", "momentum_360.json"]
+    assert sorted(os.listdir(d)) == ["REPORT.md", "ema_trend_30_100.json", "momentum_180.json",
+                                     "momentum_360.json", "momentum_90.json"]
     s1 = json.load(open(f"{d}/momentum_180.json"))
     assert s1["trades"] == [] and s1["last_ts"] is not None
     text = paper_job.run_job(d, 55.0, NOW, fake_fetch_factory(1100))  # later run processes the new bars
