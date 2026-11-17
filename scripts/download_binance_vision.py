@@ -82,12 +82,14 @@ def main(argv=None):
     ap.add_argument("--months", type=int, default=24)
     ap.add_argument("--out", default="data")
     ap.add_argument("--symbols", nargs="+", default=["BTCUSDT", "ETHUSDT"])
+    ap.add_argument("--only", nargs="+", default=list(INTERVALS), choices=list(INTERVALS),
+                    help="e.g. --only H4 to fetch only 4h candles")
     a = ap.parse_args(argv)
     os.makedirs(a.out, exist_ok=True)
     months = month_list(a.months)
     for sym in a.symbols:
         pair = sym.replace("USDT", "-USDT")
-        for name, iv in INTERVALS.items():
+        for name, iv in ((k, v) for k, v in INTERVALS.items() if k in a.only):
             print(f"{sym} {iv} ...", end=" ", flush=True)
             rows = download(sym, iv, months)
             path = os.path.join(a.out, f"{pair}_{name}.csv")
