@@ -36,3 +36,5 @@ Synthetic tests prove the logic is correct, **not that any strategy is profitabl
 
 ## Data download
 `scripts/download_okx_candles.py` fetches public OKX candles (no keys). Tested only against a mocked server: never run against real OKX from this environment (blocked).
+
+`scripts/download_binance_vision.py`: fallback source (Binance monthly archives) used when OKX is unreachable (e.g. Colab/US IPs). Binance data is NOT OKX data; results must be re-validated on OKX candles. Tested only against mocked downloads.
