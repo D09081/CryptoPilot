@@ -1,0 +1,19 @@
+{
+ "cash": 55.0,
+ "day": null,
+ "day_start_equity": 55.0,
+ "events": [
+  {
+   "msg": "paper trading started (forward only)",
+   "ts": 1794888000000
+  }
+ ],
+ "initial_equity": 55.0,
+ "last_ts": 1794888000000,
+ "peak": 55.0,
+ "pending_entry": null,
+ "pos": null,
+ "source": "binance",
+ "strategy": "momentum_180",
+ "trades": []
+}
