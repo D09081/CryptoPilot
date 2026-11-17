@@ -17,7 +17,7 @@ from cryptopilot.backtest import load_candles_csv
 from cryptopilot.metrics import compute_stats
 from cryptopilot.profitability import MarketCosts
 from cryptopilot.sizing import ExchangeRules
-from cryptopilot.slow import ACTIVE_CANDIDATES, CANDIDATES, run_slow_backtest
+from cryptopilot.slow import ACTIVE_CANDIDATES, CANDIDATES, FAST_CANDIDATES, run_slow_backtest
 from cryptopilot.validator import validate
 
 H4 = 4 * 3600_000
@@ -40,16 +40,18 @@ def main(argv=None):
     ap.add_argument("--equity", type=float, default=55.0)
     ap.add_argument("--symbols", nargs="+", default=["BTC-USDT", "ETH-USDT"])
     ap.add_argument("--taker-fee", type=float, default=0.001)
-    ap.add_argument("--set", choices=["slow", "active"], default="slow")
+    ap.add_argument("--set", choices=["slow", "active", "fast"], default="slow")
+    ap.add_argument("--tf", choices=["H4", "H1"], default="H4", help="candle files to read (fast set uses H1)")
     a = ap.parse_args(argv)
     dev_end, val_end = ts(a.dev_end), ts(a.val_end)
-    cands = ACTIVE_CANDIDATES if a.set == "active" else CANDIDATES
+    cands = {"slow": CANDIDATES, "active": ACTIVE_CANDIDATES, "fast": FAST_CANDIDATES}[a.set]
+    tf_ms = 3600_000 if a.tf == "H1" else H4
     mkt = MarketCosts(2.0, 2.0, 5.0)
-    data = {s: load_candles_csv(os.path.join(a.data_dir, f"{s}_H4.csv"), H4) for s in a.symbols}
+    data = {s: load_candles_csv(os.path.join(a.data_dir, f"{s}_{a.tf}.csv"), tf_ms) for s in a.symbols}
     for s, c in data.items():
         d0 = dt.datetime.fromtimestamp(c.ts[0] / 1000, dt.timezone.utc).date()
         d1 = dt.datetime.fromtimestamp(c.ts[-1] / 1000, dt.timezone.utc).date()
-        print(f"{s}: {len(c)} H4 bars {d0}..{d1}")
+        print(f"{s}: {len(c)} {a.tf} bars {d0}..{d1}")
     print(f"Periods: DEV < {a.dev_end} <= VALIDATION < {a.val_end} <= FINAL. Costs assumed. Candidates tried: {len(cands)}.\n")
 
     trades = {}

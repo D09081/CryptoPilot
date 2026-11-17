@@ -81,6 +81,14 @@ ACTIVE_CANDIDATES: List[SlowStrategy] = [
 ]
 
 
+# Pre-registered FAST family for H1 candles (declared before any H1 result was seen). Cumulative tried: 18.
+FAST_CANDIDATES: List[SlowStrategy] = [
+    SlowStrategy("donchian", 24), SlowStrategy("donchian", 48),
+    SlowStrategy("ema_trend", 12, 48), SlowStrategy("ema_trend", 24, 96),
+    SlowStrategy("momentum", 24), SlowStrategy("momentum", 72),
+]
+
+
 def run_slow_backtest(symbol: str, c: Candles, strat: SlowStrategy, rules: ExchangeRules,
                       market: MarketCosts, equity: float, risk_pct: float = 0.5,
                       warmup: int = 410) -> List[Trade]:
