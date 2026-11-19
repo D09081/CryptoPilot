@@ -1,6 +1,6 @@
 {
  "cash": 55.0,
- "day": "2026-11-18",
+ "day": "2026-11-19",
  "day_start_equity": 55.0,
  "events": [
   {
@@ -9,7 +9,7 @@
   }
  ],
  "initial_equity": 55.0,
- "last_ts": 1795032000000,
+ "last_ts": 1795075200000,
  "peak": 55.0,
  "pending_entry": null,
  "pos": null,
