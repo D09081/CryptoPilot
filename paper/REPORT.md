@@ -1,7 +1,7 @@
 # CryptoPilot: paper trading status
 
 **SIMULATION. No real orders, no real money.** Prices source: binance. Fills, fees (0.10%/side), spread and slippage are simulated assumptions.
-Updated: 2026-11-26 13:46 UTC.
+Updated: 2026-11-27 00:30 UTC.
 
 ## momentum_180
 
@@ -9,7 +9,7 @@ Updated: 2026-11-26 13:46 UTC.
 - Position: none (cash)
 - Pending entry: none
 - Closed trades: 0, net +0.0000 USDT, win rate 0%, profit factor 0.00, max drawdown 0.00%
-- Last processed bar: 2026-11-26 08:00 UTC
+- Last processed bar: 2026-11-26 20:00 UTC
 
 Recent events:
 
@@ -21,7 +21,7 @@ Recent events:
 - Position: none (cash)
 - Pending entry: none
 - Closed trades: 0, net +0.0000 USDT, win rate 0%, profit factor 0.00, max drawdown 0.00%
-- Last processed bar: 2026-11-26 08:00 UTC
+- Last processed bar: 2026-11-26 20:00 UTC
 
 Recent events:
 
@@ -33,7 +33,7 @@ Recent events:
 - Position: none (cash)
 - Pending entry: none
 - Closed trades: 0, net +0.0000 USDT, win rate 0%, profit factor 0.00, max drawdown 0.00%
-- Last processed bar: 2026-11-26 08:00 UTC
+- Last processed bar: 2026-11-26 20:00 UTC
 
 Recent events:
 
@@ -45,7 +45,7 @@ Recent events:
 - Position: none (cash)
 - Pending entry: none
 - Closed trades: 0, net +0.0000 USDT, win rate 0%, profit factor 0.00, max drawdown 0.00%
-- Last processed bar: 2026-11-26 08:00 UTC
+- Last processed bar: 2026-11-26 20:00 UTC
 
 Recent events:
 
